@@ -1,5 +1,7 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+<<<<<<< HEAD
+=======
 // Temporary password placeholder
 var passwordtemp = "temporary password";
 
@@ -35,6 +37,7 @@ function random_specialChar_gen() {
 // Write password to the #password input
 function writePassword() {
   password = generatePassword();
+>>>>>>> c92a20d3f1f6ef2d35e964b00b002178f41d1cb9
 
 // Write password to the #password input
 function writePassword() {
@@ -48,8 +51,11 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 
 // TODO: Make the password generator 
 // TODO: Find out how to display the prompts
 =======
 >>>>>>> 149b710485c9d130a29eb23f657bd1e0636f4bb6
+>>>>>>> c92a20d3f1f6ef2d35e964b00b002178f41d1cb9
