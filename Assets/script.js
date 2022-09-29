@@ -35,6 +35,10 @@ function random_specialChar_gen() {
 // Write password to the #password input
 function writePassword() {
   password = generatePassword();
+
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -43,6 +47,9 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+<<<<<<< HEAD
 
 // TODO: Make the password generator 
 // TODO: Find out how to display the prompts
+=======
+>>>>>>> 149b710485c9d130a29eb23f657bd1e0636f4bb6
