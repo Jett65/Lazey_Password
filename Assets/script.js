@@ -35,7 +35,7 @@ function random_char_gen() {
   return randChar;
 }
 
-function check_criteria() {
+function check_criteria(choos_fintion) {
   // Checks the criteria given
   var length = getLength();
 
@@ -44,7 +44,7 @@ function check_criteria() {
     while (true) {
       var get_length = prompt("How many characters do you want");
       console.log(get_length);
-      if (get_length < 8 || get_length > 128) {
+      if (get_length <= 8 || get_length >= 128) {
         alert("Password must be at least 8 characters long");
       } else {
         break;
@@ -53,16 +53,23 @@ function check_criteria() {
     return get_length;
   }
 
-  function getCase() {}
-  function getSchar() {}
+  function getCase() { }
+  function getSchar() { }
 
+  if (choos_fintion == 0) {
+    return getLength();
+  } else if (choos_fintion == 1) {
+    return getCase();
+  } else if (choos_fintion == 2) {
+    return getSchar();
+  } else { }
 }
 
 function generatePassword(length) {
   // Generates the password from the criteria
   var password = "";
   for (var i = 0; i < length; i++) {
-    password + random_let_gen(lowercase_letters);
+    password += random_let_gen(lowercase_letters);
   }
   return password;
 }
@@ -72,7 +79,7 @@ function writePassword() {
 }
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword(check_criteria.get_length());
+  var password = generatePassword(9);
 
   var passwordText = document.querySelector("#password");
 
@@ -83,6 +90,4 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-// TODO: Make the password generator
-// TODO: Make the get_criteria function not go on after a mistake has bin made twice
-// TODO: FInd out what to do with capitol letters
+// TODO: Make the popups work for the other criteria
