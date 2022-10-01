@@ -37,23 +37,21 @@ function random_char_gen() {
 
 function check_criteria(choos_fintion) {
   // Checks the criteria given
-  var length = getLength();
+  // lowercase, uppercase, numeric, and/or special characters
 
   function getLength() {
     // Gets the length of the password
-    while (true) {
-      var get_length = prompt("How many characters do you want");
-      console.log(get_length);
-      if (get_length <= 8 || get_length >= 128) {
-        alert("Password must be at least 8 characters long");
-      } else {
-        break;
-      }
+    var get_length = prompt("How many characters would you like");
+    if (get_length < 8 || get_length > 128) {
+      alert("Password must be between 8 and 128 characters");
+      getLength();
+    } else {
+      return get_length;
     }
-    return get_length;
   }
 
   function getCase() { }
+  function getNums() { }
   function getSchar() { }
 
   if (choos_fintion == 0) {
@@ -62,6 +60,8 @@ function check_criteria(choos_fintion) {
     return getCase();
   } else if (choos_fintion == 2) {
     return getSchar();
+  } else if (choos_fintion == 3) {
+    return getNums();
   } else { }
 }
 
@@ -79,7 +79,8 @@ function writePassword() {
 }
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword(9);
+
+  var password = generatePassword(check_criteria(0));
 
   var passwordText = document.querySelector("#password");
 
@@ -91,3 +92,4 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 // TODO: Make the popups work for the other criteria
+// figure out how the <= works
