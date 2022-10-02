@@ -50,18 +50,58 @@ function check_criteria(choos_fintion) {
     }
   }
 
-  function getCase() { }
-  function getNums() { }
-  function getSchar() { }
+  function getCase() {
+    // Gets wether or not the user wants capitol letters
+    var include = 1;
+    var exclude = 0;
+
+    var get_case = prompt("would you like capitol letters (Enter [Y] or [N])")
+    if (get_case.toUpperCase() == "Y" || get_case.toUpperCase() == "YES" ){
+      return include
+    } else if (get_case.toUpperCase() == "N" || get_case.toUpperCase() == "NO"){
+      return exclude
+    } else {
+      alert("You must Enter Y or N")
+      getCase()
+    }
+  }
+  function getNums() {
+    var include = 1;
+    var exclude = 0;
+
+    var getNums = prompt("would you like to include numbers (Enter [Y] or [N])")
+    if (getNums.toUpperCase() == "Y" || getNums.toUpperCase() == "YES" ){
+      return include
+    } else if (getNums.toUpperCase() == "N" || getNums.toUpperCase() == "NO"){
+      return exclude
+    } else {
+      alert("You must Enter Y or N")
+      getCase()
+    }
+  }
+  function getspecialChars() {
+    var include = 1;
+    var exclude = 0;
+
+    var get_specialChars = prompt("would you like to include Special Characters (Enter [Y] or [N])")
+    if (get_specialChars.toUpperCase() == "Y" || get_specialChars.toUpperCase() == "YES" ){
+      return include
+    } else if (get_specialChars.toUpperCase() == "N" || get_specialChars.toUpperCase() == "NO"){
+      return exclude
+    } else {
+      alert("You must Enter Y or N")
+      getCase()
+    }
+  }
 
   if (choos_fintion == 0) {
     return getLength();
   } else if (choos_fintion == 1) {
     return getCase();
   } else if (choos_fintion == 2) {
-    return getSchar();
-  } else if (choos_fintion == 3) {
     return getNums();
+  } else if (choos_fintion == 3) {
+    return getspecialChars();
   } else { }
 }
 
@@ -91,5 +131,4 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-// TODO: Make the popups work for the other criteria
-// figure out how the <= works
+// TODO: get the password to generate with special characters
