@@ -3,6 +3,8 @@ var generateBtn = document.querySelector("#generate");
 // capitol and lowercase letters
 var lowercase_letters = "abcdefghijklmnopqrstuvwxyz";
 var uppercase_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+// message if they enter all no
+var massage = "Press Generate Password to try again.";
 
 // Random generators
 function random_num_gen() {
@@ -137,29 +139,37 @@ function getSpecialChars() {
 // Generates password
 function generatePassword(length, lower, upper, nums, special) {
   // randomly generate a password
-  var password = "";
-  var prams_list = [lower, upper, nums, special];
-  var include_list = [];
-  for (var i = 0; i < 4; i++) {
-    if (prams_list[i] >= 1) {
-      include_list.push(prams_list[i]);
-    } else {} 
-  }
+  // checks if at lest one character is spec
+  if (lower == 0 && upper == 0 && nums == 0 && special == 0) {
+    alert("at lest One character type must be specified");
+    return massage;
+  }else{
+    var password = "";
+    var prams_list = [lower, upper, nums, special];
+    var include_list = [];
+    for (var i = 0; i < 4; i++) {
+      if (prams_list[i] >= 1) {
+        include_list.push(prams_list[i]);
+      } else { }
+    }
 
-  // generate random password based on criteria
-  for (var i = 0; i < length; i++) {
-    var select = Math.floor(Math.random() * include_list.length);
-    if (include_list[select] == 1) {
-      password += random_let_gen(lowercase_letters);
-    } else if (include_list[select] == 2) {
-      password += random_let_gen(uppercase_letters);
-    } else if (include_list[select] == 3) {
-      password += random_num_gen();
-    } else if (include_list[select] == 4) {
-      password += random_char_gen();
-    } else {}
+    // generate random password based on criteria
+    for (var i = 0; i < length; i++) {
+      var select = Math.floor(Math.random() * include_list.length);
+      if (include_list[select] == 1) {
+        password += random_let_gen(lowercase_letters);
+      } else if (include_list[select] == 2) {
+        password += random_let_gen(uppercase_letters);
+      } else if (include_list[select] == 3) {
+        password += random_num_gen();
+      } else if (include_list[select] == 4) {
+        password += random_char_gen();
+      } else { }
+    }
+    return password;
   }
-  return password;
+  
+  
 }
 
 // Write password to the #password input
