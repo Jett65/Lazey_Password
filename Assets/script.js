@@ -4,10 +4,6 @@ var generateBtn = document.querySelector("#generate");
 var lowercase_letters = "abcdefghijklmnopqrstuvwxyz";
 var uppercase_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-// Temporary password placeholder
-var passwordtemp = "temporary password";
-
-
 // Random generators
 function random_num_gen() {
   // Generate random number 0 to 9
@@ -139,29 +135,35 @@ function getSpecialChars() {
 
 
 // Generates password
-function generatePassword(lower, upper, nums, special, length) {
+function generatePassword(length, lower, upper, nums, special) {
   // randomly generate a password
-  // lower: 1 upper: 2 numbers: 4 special: 8
-  var password = "";
-  for (var i = 0; i > length; i++) {
-    if (lower == 1) {
-      // if include lowercase letters
-      password += random_let_gen(lowercase_letters);
-    } else { }
-    if (upper == 1) {
-      // if include uppercase letters
-      password += random_let_gen(uppercase_letters);
-    } else { }
-    if (nums == 1) {
-      // if include numbers
-      password += random_num_gen();
-    } else { }
-    if (special == 1) {
-      // if include special characters
-      password += random_char_gen();
-    } else { }
-  }
-  console.log(password);
+  console.log(lower, upper, nums, special, length);
+
+  // generate random password based on criteria
+  for (var i = 0; i < length; i++) {
+    var select = Math.floor(Math.random() * 4);
+    if (lower == 1 && select == 0){
+      password += random_let_gen(lowercase_letters)
+    } else if (lower == 0){
+      i--;
+    } 
+    if (upper == 1 && select == 1){
+      password += random_let_gen(uppercase_letters)
+    } else if (upper == 0){
+      i--;
+    } 
+    if (nums == 1 && select == 2){
+      password += random_num_gen()
+    }  else if (nums == 0){
+      i--;
+    } 
+     if (special == 1 && select == 3) {
+      password += random_char_gen()
+    }  else if (special == 0){
+      i--;
+    }
+  } 
+  console.log(password)
   return password;
 }
 
@@ -185,4 +187,4 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-// TODO: make the rest of the cases work for password generation
+// TODO: make the page not crash
