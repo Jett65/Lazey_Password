@@ -1,8 +1,12 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+// capitol and lowercase letters
+var lowercase_letters = "abcdefghijklmnopqrstuvwxyz";
+var uppercase_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 // Temporary password placeholder
 var passwordtemp = "temporary password";
+
 
 // Random generators
 function random_num_gen() {
@@ -11,18 +15,14 @@ function random_num_gen() {
   return randInt;
 }
 
-// capitol and lowercase letters
-var lowercase_letters = "abcdefghijklmnopqrstuvwxyz";
-var uppercase_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
 function random_let_gen(alpa_string) {
   // Generate random character from the english alphabet
+  // requires one of the _letters strings
   var alpha = alpa_string;
   var randCharNum = Math.floor(Math.random() * alpha.length);
   var randChar = alpha[randCharNum];
   return randChar;
 }
-
 
 function random_char_gen() {
   // Generate random character from the english alphabet
@@ -35,83 +35,168 @@ function random_char_gen() {
   return randChar;
 }
 
-function check_criteria(choos_fintion) {
-  // Checks the criteria given
-  // lowercase, uppercase, numeric, and/or special characters
 
-  function getLength() {
-    // Gets the length of the password
+// Checks the criteria 
+function getLength() {
+  // Gets the length of the password
+  while (true) {
     var get_length = prompt("How many characters would you like");
-    if (get_length < 8 || get_length > 128) {
+    if (get_length == null) {
+      break;
+    } else if (get_length < 8 || get_length > 128) {
       alert("Password must be between 8 and 128 characters");
-      getLength();
     } else {
       return get_length;
+      break;
     }
   }
-
-  function getCase() {
-    // Gets wether or not the user wants capitol letters
-    var include = 1;
-    var exclude = 0;
-
-    var get_case = prompt("would you like capitol letters (Enter [Y] or [N])")
-    if (get_case.toUpperCase() == "Y" || get_case.toUpperCase() == "YES" ){
-      return include
-    } else if (get_case.toUpperCase() == "N" || get_case.toUpperCase() == "NO"){
-      return exclude
-    } else {
-      alert("You must Enter Y or N")
-      getCase()
-    }
-  }
-  function getNums() {
-    var include = 1;
-    var exclude = 0;
-
-    var getNums = prompt("would you like to include numbers (Enter [Y] or [N])")
-    if (getNums.toUpperCase() == "Y" || getNums.toUpperCase() == "YES" ){
-      return include
-    } else if (getNums.toUpperCase() == "N" || getNums.toUpperCase() == "NO"){
-      return exclude
-    } else {
-      alert("You must Enter Y or N")
-      getCase()
-    }
-  }
-  function getspecialChars() {
-    var include = 1;
-    var exclude = 0;
-
-    var get_specialChars = prompt("would you like to include Special Characters (Enter [Y] or [N])")
-    if (get_specialChars.toUpperCase() == "Y" || get_specialChars.toUpperCase() == "YES" ){
-      return include
-    } else if (get_specialChars.toUpperCase() == "N" || get_specialChars.toUpperCase() == "NO"){
-      return exclude
-    } else {
-      alert("You must Enter Y or N")
-      getCase()
-    }
-  }
-
-  if (choos_fintion == 0) {
-    return getLength();
-  } else if (choos_fintion == 1) {
-    return getCase();
-  } else if (choos_fintion == 2) {
-    return getNums();
-  } else if (choos_fintion == 3) {
-    return getspecialChars();
-  } else { }
 }
 
-function generatePassword(length) {
+function getCase() {
+  // Gets wether or not the user wants capitol letters
+  var include = 1;
+  var exclude = 0;
+
+  while (true) {
+    var get_case = prompt("would you like to include capitol letters (Enter [Y] or [N])");
+    if (get_case == null) {
+      return exclude;
+      break;
+    } else if (get_case.toUpperCase() == "Y" || get_case.toUpperCase() == "YES") {
+      return include;
+      break;
+    } else if (get_case.toUpperCase() == "N" || get_case.toUpperCase() == "NO") {
+      return exclude;
+      break;
+    } else {
+      alert("You must Enter Y or N");
+    }
+  }
+}
+
+function getNums() {
+  var include = 2;
+  var exclude = 0;
+
+  while (true) {
+    var get_nums = prompt("would you like to include numbers (Enter [Y] or [N])");
+    if (get_nums == null) {
+      return exclude;
+      break;
+    } else if (get_nums.toUpperCase() == "Y" || get_nums.toUpperCase() == "YES") {
+      return include;
+      break;
+    } else if (get_nums.toUpperCase() == "N" || get_nums.toUpperCase() == "NO") {
+      return exclude;
+      break;
+    } else {
+      alert("You must Enter Y or N");
+    }
+  }
+}
+
+function getspecialChars() {
+  var include = 4;
+  var exclude = 0;
+
+  while (true) {
+    var get_specialChar = prompt("would you like to include special characters (Enter [Y] or [N])");
+    if (get_specialChar == null) {
+      return exclude;
+      break;
+    } else if (get_specialChar.toUpperCase() == "Y" || get_specialChar.toUpperCase() == "YES") {
+      return include;
+      break;
+    } else if (get_specialChar.toUpperCase() == "N" || get_specialChar.toUpperCase() == "NO") {
+      return exclude;
+      break;
+    } else {
+      alert("You must Enter Y or N");
+    }
+  }
+}
+
+
+// Generates password
+function generatePassword() {
   // Generates the password from the criteria
   var password = "";
-  for (var i = 0; i < length; i++) {
-    password += random_let_gen(lowercase_letters);
+  // var length = getLength();
+  var length = 8
+  var include_caps = getCase();
+  var include_nums = getNums();
+  var include_special = getspecialChars();
+
+  // adds the include_ so they work with the cases
+  var resoles = (include_caps+include_nums+include_special)
+
+  switch (resoles) {
+    // console.log("yes")
+    // console.log("no")
+    case 0:
+      // lowercase only
+      // no no no
+      for (var i = 0; i < length; i++) {
+        password += random_let_gen(lowercase_letters);
+      }
+      return password;
+      break;
+    case 1:
+      // include uppercase letters
+      // yos no no
+      for (var i = 0; i < length; i++) {
+        // 0: lowercase letter
+        // 1; upper case letter
+        var select = Math.floor(Math.random() * 2)
+        console.log(select)
+        if (select == 0){
+          password += random_let_gen(lowercase_letters);
+        } else{
+          password += random_let_gen(uppercase_letters);
+        } 
+      }
+      return password
+      break;
+    case 2:
+      // include numbers 
+      // no yos no
+      for (var i = 0; i < length; i++) {
+        // 0: lowercase letter
+        // 1; number
+        var select = Math.floor(Math.random() * 2)
+        if (select == 0){
+          password += random_let_gen(lowercase_letters);
+        } else{
+          password += random_num_gen();
+        } 
+      }
+      return password
+      break;
+    case 3:
+      // include capitol letters and numbers
+      // yes yes no 
+      break;
+    case 4:
+      // include special characters
+      // no no yes   
+      break;
+    case 5:
+      // include capitol letters and special characters
+      // yes no yes    
+      break;
+    case 6:
+      // include numbers and special characters
+      // no yes yes    
+      break;
+    case 7:
+      // include capitol letters and numbers and special characters
+      // yes yes yes   
+      break;
+    default:
+      console.log("Broken")
+      break;
   }
-  return password;
+
 }
 // Write password to the #password input
 function writePassword() {
@@ -120,7 +205,7 @@ function writePassword() {
 // Write password to the #password input
 function writePassword() {
 
-  var password = generatePassword(check_criteria(0));
+  var password = generatePassword();
 
   var passwordText = document.querySelector("#password");
 
@@ -131,4 +216,4 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-// TODO: get the password to generate with special characters
+// TODO: make the rest of the cases work for password generation
