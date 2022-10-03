@@ -52,9 +52,30 @@ function getLength() {
   }
 }
 
-function getCase() {
+function getLowerCase() {
   // Gets wether or not the user wants capitol letters
   var include = 1;
+  var exclude = 0;
+
+  while (true) {
+    var get_case = prompt("would you like to include lowercase letters (Enter [Y] or [N])");
+    if (get_case == null) {
+      return exclude;
+      break;
+    } else if (get_case.toUpperCase() == "Y" || get_case.toUpperCase() == "YES") {
+      return include;
+      break;
+    } else if (get_case.toUpperCase() == "N" || get_case.toUpperCase() == "NO") {
+      return exclude;
+      break;
+    } else {
+      alert("You must Enter Y or N");
+    }
+  }
+
+function getUpperCase() {
+  // Gets wether or not the user wants capitol letters
+  var include = 2;
   var exclude = 0;
 
   while (true) {
@@ -72,10 +93,9 @@ function getCase() {
       alert("You must Enter Y or N");
     }
   }
-}
 
 function getNums() {
-  var include = 2;
+  var include = 4;
   var exclude = 0;
 
   while (true) {
@@ -96,7 +116,7 @@ function getNums() {
 }
 
 function getspecialChars() {
-  var include = 4;
+  var include = 8;
   var exclude = 0;
 
   while (true) {
@@ -118,82 +138,68 @@ function getspecialChars() {
 
 
 // Generates password
-function generatePassword() {
-  // Generates the password from the criteria
+function generatePassword(lower,upper,nums,special,length) {
+  // randomly generate a password
+  // lower: 1 upper: 2 numbers: 4 special: 8
   var password = "";
-  // var length = getLength();
-  var length = 8
-  var include_caps = getCase();
+  for (var i = 0; i < length; i++) {
+    if (lower == 1){
+      // if include lowercase letters
+      password += random_let_gen(lowercase_letters)
+    }
+  }
+  
+}
+
+function getPassword() {
+  // Generates the password from the criteria
+  var length = getLength();
+  var include_lower = getLowerCase();
+  var include_caps = getUpperCase();
   var include_nums = getNums();
   var include_special = getspecialChars();
 
   // adds the include_ so they work with the cases
-  var resoles = (include_caps+include_nums+include_special)
+  var resoles = (include_lower+include_caps+include_nums+include_special)
 
   switch (resoles) {
     // console.log("yes")
     // console.log("no")
     case 0:
-      // lowercase only
-      // no no no
+      break;
+    case 0:
+      break;
+    case 0:
+      break;
+    case 0:
+      break;
+    case 0:
+      break;
+    case 0:
+      break;
+    case 0:
+      break;
+    case 0:
+      break;
+    case 0:
+      break;
+    case 0:
+      break;
+    case 0:
+      break;
+    case 0:
+      break;
+    case 0:
+      break;
+    case 0:
+      break;
+    case 0:
+      break;       
+    default:
       for (var i = 0; i < length; i++) {
         password += random_let_gen(lowercase_letters);
       }
       return password;
-      break;
-    case 1:
-      // include uppercase letters
-      // yos no no
-      for (var i = 0; i < length; i++) {
-        // 0: lowercase letter
-        // 1; upper case letter
-        var select = Math.floor(Math.random() * 2)
-        console.log(select)
-        if (select == 0){
-          password += random_let_gen(lowercase_letters);
-        } else{
-          password += random_let_gen(uppercase_letters);
-        } 
-      }
-      return password
-      break;
-    case 2:
-      // include numbers 
-      // no yos no
-      for (var i = 0; i < length; i++) {
-        // 0: lowercase letter
-        // 1; number
-        var select = Math.floor(Math.random() * 2)
-        if (select == 0){
-          password += random_let_gen(lowercase_letters);
-        } else{
-          password += random_num_gen();
-        } 
-      }
-      return password
-      break;
-    case 3:
-      // include capitol letters and numbers
-      // yes yes no 
-      break;
-    case 4:
-      // include special characters
-      // no no yes   
-      break;
-    case 5:
-      // include capitol letters and special characters
-      // yes no yes    
-      break;
-    case 6:
-      // include numbers and special characters
-      // no yes yes    
-      break;
-    case 7:
-      // include capitol letters and numbers and special characters
-      // yes yes yes   
-      break;
-    default:
-      console.log("Broken")
       break;
   }
 
