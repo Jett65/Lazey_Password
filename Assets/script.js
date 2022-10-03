@@ -72,10 +72,10 @@ function getLowerCase() {
       alert("You must Enter Y or N");
     }
   }
-
+}
 function getUpperCase() {
   // Gets wether or not the user wants capitol letters
-  var include = 2;
+  var include = 1;
   var exclude = 0;
 
   while (true) {
@@ -93,9 +93,10 @@ function getUpperCase() {
       alert("You must Enter Y or N");
     }
   }
+}
 
 function getNums() {
-  var include = 4;
+  var include = 1;
   var exclude = 0;
 
   while (true) {
@@ -115,8 +116,8 @@ function getNums() {
   }
 }
 
-function getspecialChars() {
-  var include = 8;
+function getSpecialChars() {
+  var include = 1;
   var exclude = 0;
 
   while (true) {
@@ -138,80 +139,42 @@ function getspecialChars() {
 
 
 // Generates password
-function generatePassword(lower,upper,nums,special,length) {
+function generatePassword(lower, upper, nums, special, length) {
   // randomly generate a password
   // lower: 1 upper: 2 numbers: 4 special: 8
   var password = "";
-  for (var i = 0; i < length; i++) {
-    if (lower == 1){
+  for (var i = 0; i > length; i++) {
+    if (lower == 1) {
       // if include lowercase letters
-      password += random_let_gen(lowercase_letters)
-    }
+      password += random_let_gen(lowercase_letters);
+    } else { }
+    if (upper == 1) {
+      // if include uppercase letters
+      password += random_let_gen(uppercase_letters);
+    } else { }
+    if (nums == 1) {
+      // if include numbers
+      password += random_num_gen();
+    } else { }
+    if (special == 1) {
+      // if include special characters
+      password += random_char_gen();
+    } else { }
   }
-  
+  console.log(password);
+  return password;
 }
 
-function getPassword() {
-  // Generates the password from the criteria
-  var length = getLength();
-  var include_lower = getLowerCase();
-  var include_caps = getUpperCase();
-  var include_nums = getNums();
-  var include_special = getspecialChars();
-
-  // adds the include_ so they work with the cases
-  var resoles = (include_lower+include_caps+include_nums+include_special)
-
-  switch (resoles) {
-    // console.log("yes")
-    // console.log("no")
-    case 0:
-      break;
-    case 0:
-      break;
-    case 0:
-      break;
-    case 0:
-      break;
-    case 0:
-      break;
-    case 0:
-      break;
-    case 0:
-      break;
-    case 0:
-      break;
-    case 0:
-      break;
-    case 0:
-      break;
-    case 0:
-      break;
-    case 0:
-      break;
-    case 0:
-      break;
-    case 0:
-      break;
-    case 0:
-      break;       
-    default:
-      for (var i = 0; i < length; i++) {
-        password += random_let_gen(lowercase_letters);
-      }
-      return password;
-      break;
-  }
-
-}
-// Write password to the #password input
-function writePassword() {
-  password = generatePassword();
-}
 // Write password to the #password input
 function writePassword() {
 
-  var password = generatePassword();
+  var password = generatePassword(
+    getLength(),
+    getLowerCase(),
+    getUpperCase(),
+    getNums(),
+    getSpecialChars()
+  );
 
   var passwordText = document.querySelector("#password");
 
