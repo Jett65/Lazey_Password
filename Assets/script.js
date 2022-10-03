@@ -71,7 +71,7 @@ function getLowerCase() {
 }
 function getUpperCase() {
   // Gets wether or not the user wants capitol letters
-  var include = 1;
+  var include = 2;
   var exclude = 0;
 
   while (true) {
@@ -92,7 +92,7 @@ function getUpperCase() {
 }
 
 function getNums() {
-  var include = 1;
+  var include = 3;
   var exclude = 0;
 
   while (true) {
@@ -113,7 +113,7 @@ function getNums() {
 }
 
 function getSpecialChars() {
-  var include = 1;
+  var include = 4;
   var exclude = 0;
 
   while (true) {
@@ -137,33 +137,28 @@ function getSpecialChars() {
 // Generates password
 function generatePassword(length, lower, upper, nums, special) {
   // randomly generate a password
-  console.log(lower, upper, nums, special, length);
+  var password = "";
+  var prams_list = [lower, upper, nums, special];
+  var include_list = [];
+  for (var i = 0; i < 4; i++) {
+    if (prams_list[i] >= 1) {
+      include_list.push(prams_list[i]);
+    } else {} 
+  }
 
   // generate random password based on criteria
   for (var i = 0; i < length; i++) {
-    var select = Math.floor(Math.random() * 4);
-    if (lower == 1 && select == 0){
-      password += random_let_gen(lowercase_letters)
-    } else if (lower == 0){
-      i--;
-    } 
-    if (upper == 1 && select == 1){
-      password += random_let_gen(uppercase_letters)
-    } else if (upper == 0){
-      i--;
-    } 
-    if (nums == 1 && select == 2){
-      password += random_num_gen()
-    }  else if (nums == 0){
-      i--;
-    } 
-     if (special == 1 && select == 3) {
-      password += random_char_gen()
-    }  else if (special == 0){
-      i--;
-    }
-  } 
-  console.log(password)
+    var select = Math.floor(Math.random() * include_list.length);
+    if (include_list[select] == 1) {
+      password += random_let_gen(lowercase_letters);
+    } else if (include_list[select] == 2) {
+      password += random_let_gen(uppercase_letters);
+    } else if (include_list[select] == 3) {
+      password += random_num_gen();
+    } else if (include_list[select] == 4) {
+      password += random_char_gen();
+    } else {}
+  }
   return password;
 }
 
